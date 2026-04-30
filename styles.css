@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(251, 251, 251);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+}
+
+#screenHome {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, rgb(255, 2, 2), rgb(255, 38, 38), rgb(242, 255, 0), rgb(255, 255, 255), rgb(242, 255, 0), rgb(255, 2, 2), rgb(255, 38, 38));
+    opacity: 0.7;
+}
+
+#screenLobby {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-image: url("images/cafe.gif");
+    background-size: cover;
+    background-position: center;
+}
+
+.screen        { display: none;  }
+.screen.active { display: block; }
+.hidden        { display: none;  }

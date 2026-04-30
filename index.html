@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Rush</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="screenHome" class="screen active">
+        <h1 id="homeTitle">Welcome to the Restaurant!</h1>
+        <div id="homeButtons">
+            <button id="startBtn">Start Your Shift!</button>
+            <button id="howToBtn">How To Play</button>
+        </div>
+    </div>
+
+    <div id="screenLobby" class="screen">
+        <div id="hudHistory" class="hud-card">
+            <h2>History</h2>
+            <p class="hud-label">Money</p>
+                <p id="moneyDisplay">$0</p>
+            <p class="hud-label">Customers Served:</p>
+                <p id="customersDisplay">0</p>
+        </div>
+
+    <div id="hudOrder" class="hudCard">
+        <h2>Current order</h2>
+        <p class="hud-label">Customer:</p>
+            <p id="customerNameDisplay">None 🙂</p>
+        <p class="hud-label">Order:</p>
+            <p id="orderDisplay">Waiting...</p>
+    </div>
+
+    <div id="customerArea" class="hidden">
+        <div id="speechBubble">
+            <p id="speechText">Hello! I'd like to order.</p>
+        </div>
+
+        <img id="customerImg" src="" alt="customer">
+
+        <button id="takeOrderBtn">Take Order</button>
+    </div>
+
+    <button id="goKitchenBtn" class="hidden">Go to Kitchen</button>
+
+    </div>
+
+    <div id="screenKitchen" class="screen">
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
