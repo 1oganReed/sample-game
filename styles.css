@@ -10,6 +10,14 @@ body{
 
 }
 
+#homeTitle{
+    font-size: 96px;
+    color:white;
+    border: 1px solid black;
+    border-radius: 15%;
+    background-color: black;
+}
+
 #screenHome {
     height: 100vh;
     display: flex;
@@ -21,14 +29,15 @@ body{
 }
 
 #screenLobby {
-    height: 100vh;
+    height: 1100px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-image: url("images/cafe.gif");
+    /* background-image: url("images/cafe.gif");
     background-size: cover;
-    background-position: center;
+    background-position: center; */
+    background-color: #000000;
     position: relative;
 }
 
@@ -37,14 +46,36 @@ body{
 .hidden        { display: none;  }
 
 /* HUD Card Styles */
-.hud-card, .hudCard {
-    background-color: rgba(255, 255, 255, 0.9);
+.hud-card {
+    position: absolute;
+    top: 24px;
+    left: 40px;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.95);
     border: 2px solid #8b4513;
     border-radius: 10px;
     padding: 15px;
-    margin: 10px;
+    margin: 0;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     font-size: 16px;
+    width: 300px;
+    text-align: center;
+}
+
+.hudCard {
+    position: absolute;
+    top: 24px;
+    right: 40px;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid #8b4513;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    font-size: 16px;
+    width: 300px;
+    text-align: center;
 }
 
 .hud-label {
@@ -55,14 +86,16 @@ body{
 
 /* Customer Area Styles */
 #customerArea {
-    background-color: rgba(255, 255, 255, 0.95);
-    border: 3px solid #8b4513;
-    border-radius: 15px;
+    /* background-color: rgba(255, 255, 255, 0.95); */
+    /* border: 3px solid #8b4513; */
+    /* border-radius: 15px; */
     padding: 20px;
     margin: 20px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     max-width: 400px;
+    position: absolute;
+    top: 340px;
 }
 
 #speechBubble {
@@ -89,9 +122,9 @@ body{
 
 #customerImg {
     width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 3px solid #8b4513;
+    height: 200px;
+    /* border-radius: 50%;
+    border: 3px solid #8b4513; */
     margin: 10px 0;
 }
 

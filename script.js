@@ -33,21 +33,21 @@ const customers = [
     greeting: "Hi! Can I get a cheeseburger?",
     order: "Cheeseburger",
     reward: 5,
-    img: "images/customer-john.png",
+    img: "images/john-idle-1.png",
   },
   {
     name: "Bob",
     greeting: "Hey, one classic burger please!",
     order: "Classic Burger",
     reward: 7,
-    img: "images/customer-bob.png",
+    img: "images/bob-idle-1.png",
   },
   {
     name: "Jane",
     greeting: "Just a hamburger",
     order: "Hamburger",
     reward: 4,
-    img: "images/customer-jane.png",
+    img: "images/jane-idle-1.png",
   },
 ];
 
