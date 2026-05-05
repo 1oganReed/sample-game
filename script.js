@@ -51,6 +51,11 @@ const customers = [
   },
 ];
 
+// Game state
+let currentCustomer = null;
+let money = 0;
+let customersServed = 0;
+
 
 
 
@@ -67,34 +72,106 @@ function showScreen(screen) {
     screen.classList.add("active");
 }
 
-startBtn.onclick = function(){
+// Initialize event listeners
+function initializeGame() {
+    startBtn.addEventListener("click", goToLobby);
+    document.getElementById("howToBtn").addEventListener("click", showHowToPlay);
+    takeOrderBtn.addEventListener("click", takeOrder);
+    goKitchenBtn.addEventListener("click", goToKitchen);
+}
+
+// Switch to lobby screen
+function goToLobby() {
     showScreen(screenLobby);
-    startGame();
+    setupLobby();
 }
 
-
-
-// closeHelp.onclick = function(){
-//   helpCard.style.display = "none";
-// }
-
-document.getElementById("howToBtn").onclick = function(){
-
-}
-
-function startGame() {
-    // Check if the image already exists to avoid duplicates
-    if (!document.getElementById("cafeImg")) {
+// Setup lobby with character and button
+function setupLobby() {
+    // Check if the image container already exists to avoid duplicates
+    if (!document.getElementById("cafeImgContainer")) {
+        // Create a container div for the framed image
+        const container = document.createElement("div");
+        container.id = "cafeImgContainer";
+        container.style.width = "70%";
+        container.style.maxWidth = "800px";
+        container.style.margin = "20px auto";
+        container.style.padding = "15px";
+        container.style.backgroundColor = "#f5f5dc"; // Beige frame color
+        container.style.border = "8px solid #8b4513"; // Brown border
+        container.style.borderRadius = "10px";
+        container.style.boxShadow = "0 4px 8px rgba(0,0,0,0.3)";
+        container.style.position = "relative";
+        
+        // Create the interior image
         const img = document.createElement("img");
         img.src = "images/interior.png";
-        img.alt = "Cafe";
+        img.alt = "Cafe Interior";
         img.id = "cafeImg";
-        img.style.width = "60%";
-        img.style.margin = "32px auto";
+        img.style.width = "100%";
+        img.style.height = "auto";
         img.style.display = "block";
-        screenLobby.insertBefore(img, screenLobby.firstChild);
+        img.style.borderRadius = "5px";
+        
+        // Add the image to the container
+        container.appendChild(img);
+        
+        // Insert the container at the top of the lobby screen
+        screenLobby.insertBefore(container, screenLobby.firstChild);
     }
+    
+    // Reset and show customer area
+    customerArea.classList.remove("hidden");
+    goKitchenBtn.classList.add("hidden");
+    takeOrderBtn.classList.remove("hidden");
+    currentCustomer = null;
+    resetDisplay();
 }
+
+// Show how to play information
+function showHowToPlay() {
+    alert("How To Play:\n1. Click 'Start Your Shift' to begin\n2. Click 'Take Order' to receive a customer's order\n3. Go to the kitchen to prepare the order\n4. Complete orders to earn money!");
+}
+
+// Take order from random customer
+function takeOrder() {
+    // Select random customer from array
+    currentCustomer = customers[Math.floor(Math.random() * customers.length)];
+    
+    // Update displays
+    customerNameDisplay.textContent = currentCustomer.name;
+    orderDisplay.textContent = currentCustomer.order;
+    
+    // Update customer image and speech
+    customerImg.src = currentCustomer.img;
+    customerImg.alt = currentCustomer.name;
+    speechText.textContent = currentCustomer.greeting;
+    
+    // Hide take order button and show kitchen button
+    takeOrderBtn.classList.add("hidden");
+    goKitchenBtn.classList.remove("hidden");
+}
+
+// Switch to kitchen screen
+function goToKitchen() {
+    showScreen(screenKitchen);
+}
+
+// Reset display values
+function resetDisplay() {
+    customerNameDisplay.textContent = "None 🙂";
+    orderDisplay.textContent = "Waiting...";
+}
+
+// Update HUD displays
+function updateDisplay() {
+    moneyDisplay.textContent = "$" + money;
+    customersDisplay.textContent = customersServed;
+}
+
+// Start the game
+initializeGame();
+updateDisplay();
 
 
 
@@ -221,5 +298,3 @@ dropZone.addEventListener("dragleave", function(){
 // ---------------------------------------------------------------
 // END HOVER EFFECT
 // ---------------------------------------------------------------
-
-

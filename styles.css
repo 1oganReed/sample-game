@@ -29,8 +29,96 @@ body{
     background-image: url("images/cafe.gif");
     background-size: cover;
     background-position: center;
+    position: relative;
 }
 
 .screen        { display: none;  }
 .screen.active { display: block; }
 .hidden        { display: none;  }
+
+/* HUD Card Styles */
+.hud-card, .hudCard {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid #8b4513;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    font-size: 16px;
+}
+
+.hud-label {
+    font-weight: bold;
+    color: #8b4513;
+    margin: 5px 0 2px 0;
+}
+
+/* Customer Area Styles */
+#customerArea {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 3px solid #8b4513;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    max-width: 400px;
+}
+
+#speechBubble {
+    background-color: #fff;
+    border: 2px solid #333;
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+#speechBubble::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #333;
+}
+
+#customerImg {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #8b4513;
+    margin: 10px 0;
+}
+
+button {
+    background-color: #ff6b35;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e55a2b;
+}
+
+#goKitchenBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+}
+
+#goKitchenBtn:hover {
+    background-color: #45a049;
+}
