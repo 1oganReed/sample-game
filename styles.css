@@ -1,51 +1,117 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
-body{
+ 
+body {
     background-color: rgb(251, 251, 251);
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    overflow: hidden; /* No page-level scroll — screens handle their own layout */
 }
-
-#homeTitle{
-    font-size: 96px;
-    color:white;
-    border: 1px solid black;
-    border-radius: 15%;
-    background-color: black;
-}
-
-#screenHome {
+ 
+/* ---------------------------------------------------------------
+   SCREEN SYSTEM
+   Each .screen fills the full viewport. Only .active is shown.
+   display:flex is used so child flex rules (justify/align) work.
+--------------------------------------------------------------- */
+.screen {
+    display: none;
+    width: 100vw;
     height: 100vh;
+    overflow: hidden; /* Never scroll inside a screen */
+    position: relative;
+}
+ 
+.screen.active {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to right, rgb(255, 2, 2), rgb(255, 38, 38), rgb(242, 255, 0), rgb(255, 255, 255), rgb(242, 255, 0), rgb(255, 2, 2), rgb(255, 38, 38));
-    opacity: 0.7;
 }
-
+ 
+.hidden { display: none !important; }
+ 
+/* ---------------------------------------------------------------
+   HOME SCREEN
+--------------------------------------------------------------- */
+#screenHome {
+    background: linear-gradient(
+        to right,
+        rgb(255, 2, 2),
+        rgb(255, 38, 38),
+        rgb(242, 255, 0),
+        rgb(255, 255, 255),
+        rgb(242, 255, 0),
+        rgb(255, 2, 2),
+        rgb(255, 38, 38)
+    );
+    opacity: 0.9;
+}
+ 
+#homeTitle {
+    font-size: 72px;
+    color: white;
+    border: 1px solid black;
+    border-radius: 15%;
+    background-color: black;
+    padding: 10px 24px;
+    text-align: center;
+}
+ 
+/* ---------------------------------------------------------------
+   LOBBY SCREEN
+--------------------------------------------------------------- */
 #screenLobby {
-    height: 1100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    /* background-image: url("images/cafe.gif");
-    background-size: cover;
-    background-position: center; */
-    background-color: #000000;
-    position: relative;
+    background-color: #000;
 }
-
-.screen        { display: none;  }
-.screen.active { display: block; }
-.hidden        { display: none;  }
-
-/* HUD Card Styles */
+ 
+/* The cafe interior image acts as a full-screen background */
+#cafeImg {
+    position: absolute;
+    inset: 0;          /* shorthand for top/right/bottom/left: 0 */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* fill without stretching */
+    z-index: 0;
+}
+ 
+/* ---------------------------------------------------------------
+   KITCHEN SCREEN
+--------------------------------------------------------------- */
+#screenKitchen {
+    background-color: #111;
+}
+ 
+/* Kitchen background image — same full-cover treatment as cafe */
+#kitchenImg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+ 
+/* Serve order button sits at the bottom-center of kitchen */
+#serveOrderBtn {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    background-color: #4CAF50;
+    font-size: 20px;
+    padding: 16px 36px;
+}
+ 
+#serveOrderBtn:hover {
+    background-color: #3d9140;
+}
+ 
+/* ---------------------------------------------------------------
+   HUD CARDS (overlaid on top of background images)
+--------------------------------------------------------------- */
 .hud-card {
     position: absolute;
     top: 24px;
@@ -55,13 +121,12 @@ body{
     border: 2px solid #8b4513;
     border-radius: 10px;
     padding: 15px;
-    margin: 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     font-size: 16px;
-    width: 300px;
+    width: 200px;
     text-align: center;
 }
-
+ 
 .hudCard {
     position: absolute;
     top: 24px;
@@ -71,42 +136,44 @@ body{
     border: 2px solid #8b4513;
     border-radius: 10px;
     padding: 15px;
-    margin: 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     font-size: 16px;
-    width: 300px;
+    width: 200px;
     text-align: center;
 }
-
+ 
 .hud-label {
     font-weight: bold;
     color: #8b4513;
     margin: 5px 0 2px 0;
 }
-
-/* Customer Area Styles */
+ 
+/* ---------------------------------------------------------------
+   CUSTOMER AREA (lobby overlay)
+--------------------------------------------------------------- */
 #customerArea {
-    /* background-color: rgba(255, 255, 255, 0.95); */
-    /* border: 3px solid #8b4513; */
-    /* border-radius: 15px; */
-    padding: 20px;
-    margin: 20px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    max-width: 400px;
     position: absolute;
-    top: 340px;
+    bottom: 30px;        /* anchor to bottom so it doesn't overlap HUD */
+    left: 50%;
+    bottom: 200px;
+    transform: translateX(-50%);
+    z-index: 2;
+    text-align: center;
+    padding: 20px;
 }
-
+ 
 #speechBubble {
     background-color: #fff;
     border: 2px solid #333;
     border-radius: 20px;
-    padding: 15px;
-    margin-bottom: 15px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
     position: relative;
+    max-width: 260px;
+    margin-left: auto;
+    margin-right: auto;
 }
-
+ 
 #speechBubble::after {
     content: "";
     position: absolute;
@@ -119,15 +186,19 @@ body{
     border-right: 10px solid transparent;
     border-top: 10px solid #333;
 }
-
+ 
 #customerImg {
-    width: 120px;
-    height: 200px;
-    /* border-radius: 50%;
-    border: 3px solid #8b4513; */
+    width: 100px;
+    height: 170px;
     margin: 10px 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
-
+ 
+/* ---------------------------------------------------------------
+   BUTTONS (shared)
+--------------------------------------------------------------- */
 button {
     background-color: #ff6b35;
     color: white;
@@ -140,18 +211,19 @@ button {
     margin: 5px;
     transition: background-color 0.3s;
 }
-
+ 
 button:hover {
     background-color: #e55a2b;
 }
-
+ 
 #goKitchenBtn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    z-index: 2;
     background-color: #4CAF50;
 }
-
+ 
 #goKitchenBtn:hover {
     background-color: #45a049;
 }
