@@ -41,7 +41,7 @@ const customers = [
         greeting: "Hi! Can I get a cheeseburger?",
         order: "Cheeseburger",
         reward: 5,
-        img: "images/john-idle-1.png",
+        img: "images/joe-idle-1.png",
     },
     {
         name: "Bob",
@@ -103,7 +103,7 @@ function setupLobby() {
     takeOrderBtn.classList.remove("hidden");
     resetOrderDisplay();
     // Clear customer image so no ghost image lingers between customers
-    customerImg.src = "";
+    customerImg.src = "images/unknown.png";
     speechText.textContent = "Hello! I'd like to order.";
 }
  
