@@ -38,22 +38,25 @@ const serveOrderBtn = document.getElementById("serveOrderBtn");
 const customers = [
     {
         name: "Joe",
-        greeting: "Hi! Can I get a cheeseburger?",
+        greeting: "Hi! Can I get JUST a cheeseburger?",
         order: "Cheeseburger",
+        steps: ["Add Bun", "Add Patty", "Add Cheese", "Wrap It Up"],
         reward: 5,
         img: "images/joe-idle-1.png",
     },
     {
         name: "Bob",
-        greeting: "Hey, one classic burger please!",
+        greeting: "Hey, one classic burger with everything please!",
         order: "Classic Burger",
+        steps: ["Add Bun", "Add Patty", "Add Cheese", "Add Lettuce", "Add Tomato", "Wrap It Up"],
         reward: 7,
         img: "images/bob-idle-1.png",
     },
     {
         name: "Jane",
-        greeting: "Just a hamburger",
+        greeting: "Hamburger, NO Tomatoes...",
         order: "Hamburger",
+        steps: ["Add Bun", "Add Patty", "Add Lettuce", "Wrap It Up"],
         reward: 4,
         img: "images/jane-idle-1.png",
     },
@@ -65,6 +68,8 @@ const customers = [
 let currentCustomer = null;
 let money           = 0;
 let customersServed = 0;
+let secondsLeft = 15;
+let currentStep = 0;
  
 // ---------------------------------------------------------------
 // SCREEN SWITCHING
@@ -150,6 +155,12 @@ function goToKitchen() {
         kitchenOrderItem.textContent    = currentCustomer.order;
     }
     showScreen(screenKitchen);
+    
+    startKitchenGame();
+}
+
+startKitchenGame() {
+
 }
  
 // ---------------------------------------------------------------

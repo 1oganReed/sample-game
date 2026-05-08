@@ -54,20 +54,28 @@
  
     <!-- KITCHEN SCREEN -->
     <div id="screenKitchen" class="screen">
- 
-        <!-- Background image fills the screen -->
-        <img id="kitchenImg" src="images/kitchen.png" alt="Kitchen">
- 
-        <!-- Order reminder HUD -->
-        <div id="hudKitchenOrder" class="hudCard">
-            <h2>Preparing Order</h2>
-            <p class="hud-label">Customer:</p>
-            <p id="kitchenCustomerName">—</p>
-            <p class="hud-label">Order:</p>
-            <p id="kitchenOrderItem">—</p>
-        </div>
- 
-        <button id="serveOrderBtn">✅ Serve Order</button>
+
+    <!-- Background image -->
+    <img id="kitchenImg" src="images/kitchen.png" alt="Kitchen">
+
+    <!-- Timer — top center -->
+    <div id="timerDisplay">15s</div>
+
+    <!-- Order reminder — top right -->
+    <div id="hudKitchenOrder" class="hudCard">
+        <h2>Preparing Order</h2>
+        <p class="hud-label">Customer:</p>
+        <p id="kitchenCustomerName">—</p>
+        <p class="hud-label">Order:</p>
+        <p id="kitchenOrderItem">—</p>
+    </div>
+
+    <!-- Step buttons — center of screen -->
+    <div id="stepButtons"></div>
+
+    <!-- Step progress tracker — above buttons -->
+    <div id="stepProgress"></div>
+
     </div>
  
     <script src="script.js"></script>

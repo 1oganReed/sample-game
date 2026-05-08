@@ -36,16 +36,7 @@ body {
    HOME SCREEN
 --------------------------------------------------------------- */
 #screenHome {
-    background: linear-gradient(
-        to right,
-        rgb(255, 2, 2),
-        rgb(255, 38, 38),
-        rgb(242, 255, 0),
-        rgb(255, 255, 255),
-        rgb(242, 255, 0),
-        rgb(255, 2, 2),
-        rgb(255, 38, 38)
-    );
+    background-image: url("images/title-space.gif");
     opacity: 0.9;
 }
  
@@ -200,9 +191,9 @@ body {
    BUTTONS (shared)
 --------------------------------------------------------------- */
 button {
-    background-color: #ff6b35;
+    background-color: #111;
     color: white;
-    border: none;
+    border: 1 px solid #e7e7e7;
     padding: 12px 24px;
     border-radius: 8px;
     font-size: 16px;
@@ -213,7 +204,7 @@ button {
 }
  
 button:hover {
-    background-color: #e55a2b;
+    background-color: #444;
 }
  
 #goKitchenBtn {
