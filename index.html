@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <audio id="bg-music" src="images/bg-music.mp3"></audio>
+    <audio id="customer-greeting" src="images/greeting.mp3"></audio>
+    <audio id="write-order" src="images/writing.mp3"></audio>
+    <audio id="correct-choice" src="images/correct.mp3"></audio>
+    <audio id="gain-money" src="images/cha-ching.mp3"></audio>
+    <audio id="incorrect-choice"  src="images/incorrect.mp3"></audio>
+    <audio id="game-over"  src="images/game-over.mp3"></audio>
+    <audio id="clock-tick" src="images/clock-tick.mp3"></audio>
  
     <!-- HOME SCREEN -->
     <div id="screenHome" class="screen active">
@@ -20,10 +28,8 @@
     <!-- LOBBY SCREEN -->
     <div id="screenLobby" class="screen">
  
-        <!-- Background image fills the screen -->
         <img id="cafeImg" src="images/interior.png" alt="Cafe Interior">
  
-        <!-- HUD overlaid on top -->
         <div id="hudHistory" class="hud-card">
             <h2>History</h2>
             <p class="hud-label">Money</p>
@@ -40,7 +46,6 @@
             <p id="orderDisplay">Waiting...</p>
         </div>
  
-        <!-- Customer area -->
         <div id="customerArea">
             <div id="speechBubble">
                 <p id="speechText">Hello! I'd like to order.</p>
@@ -54,28 +59,37 @@
  
     <!-- KITCHEN SCREEN -->
     <div id="screenKitchen" class="screen">
-
-    <!-- Background image -->
-    <img id="kitchenImg" src="images/kitchen.png" alt="Kitchen">
-
-    <!-- Timer — top center -->
-    <div id="timerDisplay">15s</div>
-
-    <!-- Order reminder — top right -->
-    <div id="hudKitchenOrder" class="hudCard">
-        <h2>Preparing Order</h2>
-        <p class="hud-label">Customer:</p>
-        <p id="kitchenCustomerName">—</p>
-        <p class="hud-label">Order:</p>
-        <p id="kitchenOrderItem">—</p>
+ 
+        <img id="kitchenImg" src="images/kitchen.png" alt="Kitchen">
+ 
+        <!-- Timer — top center -->
+        <div id="timerDisplay">10s</div>
+ 
+        <!-- Order reminder — top right -->
+        <div id="hudKitchenOrder" class="hudCard">
+            <h2>Preparing Order</h2>
+            <p class="hud-label">Customer:</p>
+            <p id="kitchenCustomerName">—</p>
+            <p class="hud-label">Order:</p>
+            <p id="kitchenOrderItem">—</p>
+        </div>
+ 
+        <!-- Progress tracker — shows each step as a pill, turns green when done -->
+        <div id="stepProgress"></div>
+ 
+        <!-- Step buttons — built dynamically by JS from currentCustomer.steps -->
+        <div id="stepButtons"></div>
+ 
     </div>
-
-    <!-- Step buttons — center of screen -->
-    <div id="stepButtons"></div>
-
-    <!-- Step progress tracker — above buttons -->
-    <div id="stepProgress"></div>
-
+ 
+    <!-- GAME OVER SCREEN -->
+    <div id="screenGameOver" class="screen">
+        <h1>Game Over!</h1>
+        <p>You ran out of money!</p>
+        <div id="gameOverButtons">
+            <button id="retryBtn">Retry</button>
+            <button id="homeBtn">Return to Home</button>
+        </div>
     </div>
  
     <script src="script.js"></script>

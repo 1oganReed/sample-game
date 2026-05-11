@@ -3,35 +3,33 @@
     padding: 0;
     box-sizing: border-box;
 }
- 
+
 body {
     background-color: rgb(251, 251, 251);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    overflow: hidden; /* No page-level scroll — screens handle their own layout */
+    overflow: hidden;
 }
- 
+
 /* ---------------------------------------------------------------
    SCREEN SYSTEM
-   Each .screen fills the full viewport. Only .active is shown.
-   display:flex is used so child flex rules (justify/align) work.
 --------------------------------------------------------------- */
 .screen {
     display: none;
     width: 100vw;
     height: 100vh;
-    overflow: hidden; /* Never scroll inside a screen */
+    overflow: hidden;
     position: relative;
 }
- 
+
 .screen.active {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
- 
+
 .hidden { display: none !important; }
- 
+
 /* ---------------------------------------------------------------
    HOME SCREEN
 --------------------------------------------------------------- */
@@ -39,7 +37,7 @@ body {
     background-image: url("images/title-space.gif");
     opacity: 0.9;
 }
- 
+
 #homeTitle {
     font-size: 72px;
     color: white;
@@ -49,32 +47,30 @@ body {
     padding: 10px 24px;
     text-align: center;
 }
- 
+
 /* ---------------------------------------------------------------
    LOBBY SCREEN
 --------------------------------------------------------------- */
 #screenLobby {
     background-color: #000;
 }
- 
-/* The cafe interior image acts as a full-screen background */
+
 #cafeImg {
     position: absolute;
-    inset: 0;          /* shorthand for top/right/bottom/left: 0 */
+    inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* fill without stretching */
+    object-fit: cover;
     z-index: 0;
 }
- 
+
 /* ---------------------------------------------------------------
    KITCHEN SCREEN
 --------------------------------------------------------------- */
 #screenKitchen {
     background-color: #111;
 }
- 
-/* Kitchen background image — same full-cover treatment as cafe */
+
 #kitchenImg {
     position: absolute;
     inset: 0;
@@ -83,25 +79,143 @@ body {
     object-fit: cover;
     z-index: 0;
 }
- 
-/* Serve order button sits at the bottom-center of kitchen */
-#serveOrderBtn {
+
+/* ---------------------------------------------------------------
+   TIMER DISPLAY
+   Sits top-center of the kitchen screen.
+   Turns red via the .urgent class when <= 5 seconds remain.
+--------------------------------------------------------------- */
+#timerDisplay {
     position: absolute;
-    bottom: 30px;
+    top: 24px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
-    background-color: #4CAF50;
-    font-size: 20px;
-    padding: 16px 36px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    padding: 10px 28px;
+    border-radius: 12px;
+    letter-spacing: 2px;
+    transition: color 0.3s;
+    min-width: 100px;
+    text-align: center;
 }
- 
-#serveOrderBtn:hover {
-    background-color: #3d9140;
+
+#timerDisplay.urgent {
+    color: #ff4444; /* red warning when almost out of time */
 }
- 
+
 /* ---------------------------------------------------------------
-   HUD CARDS (overlaid on top of background images)
+   STEP PROGRESS TRACKER
+   Row of pills above the buttons. Each pill is one step.
+   .done turns it green when that step is completed.
+--------------------------------------------------------------- */
+#stepProgress {
+    position: absolute;
+    top: 100px; /* sits just below the timer */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    max-width: 700px;
+    padding: 0 20px;
+}
+
+.progress-step {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 13px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.progress-step.done {
+    background-color: #4CAF50; /* green when step is completed */
+    border-color: #4CAF50;
+}
+
+/* ---------------------------------------------------------------
+   STEP BUTTONS
+   Grid of buttons the player clicks to assemble the order.
+   .next-step highlights which button to click next.
+   .wrong flashes red on a wrong click.
+--------------------------------------------------------------- */
+#stepButtons {
+    position: absolute;
+    bottom: 60px; /* anchored near the bottom of the screen */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    max-width: 700px;
+    padding: 0 20px;
+}
+
+#stepButtons button {
+    font-size: 17px;
+    padding: 14px 20px;
+    min-width: 150px;
+    transition: background-color 0.15s, transform 0.1s, opacity 0.2s;
+}
+
+/* The next expected step glows orange so player knows what to click */
+#stepButtons button.next-step {
+    background-color: #ff6b35;
+    box-shadow: 0 0 12px rgba(255, 107, 53, 0.8);
+    transform: scale(1.05);
+}
+
+/* Completed / disabled steps go grey */
+#stepButtons button:disabled {
+    background-color: #444;
+    color: #888;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Wrong click flashes red */
+#stepButtons button.wrong {
+    background-color: #cc0000 !important;
+}
+
+/* ---------------------------------------------------------------
+   GAME OVER SCREEN
+--------------------------------------------------------------- */
+#screenGameOver {
+    background-color: #000;
+    color: white;
+    text-align: center;
+}
+
+#screenGameOver h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+#screenGameOver p {
+    font-size: 24px;
+    margin-bottom: 40px;
+}
+
+#gameOverButtons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* ---------------------------------------------------------------
+   HUD CARDS
 --------------------------------------------------------------- */
 .hud-card {
     position: absolute;
@@ -117,7 +231,7 @@ body {
     width: 200px;
     text-align: center;
 }
- 
+
 .hudCard {
     position: absolute;
     top: 24px;
@@ -132,27 +246,26 @@ body {
     width: 200px;
     text-align: center;
 }
- 
+
 .hud-label {
     font-weight: bold;
     color: #8b4513;
     margin: 5px 0 2px 0;
 }
- 
+
 /* ---------------------------------------------------------------
-   CUSTOMER AREA (lobby overlay)
+   CUSTOMER AREA (lobby)
 --------------------------------------------------------------- */
 #customerArea {
     position: absolute;
-    bottom: 30px;        /* anchor to bottom so it doesn't overlap HUD */
-    left: 50%;
     bottom: 200px;
+    left: 50%;
     transform: translateX(-50%);
     z-index: 2;
     text-align: center;
     padding: 20px;
 }
- 
+
 #speechBubble {
     background-color: #fff;
     border: 2px solid #333;
@@ -164,7 +277,7 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
- 
+
 #speechBubble::after {
     content: "";
     position: absolute;
@@ -177,23 +290,21 @@ body {
     border-right: 10px solid transparent;
     border-top: 10px solid #333;
 }
- 
+
 #customerImg {
     width: 100px;
     height: 170px;
-    margin: 10px 0;
+    margin: 10px auto;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
- 
+
 /* ---------------------------------------------------------------
-   BUTTONS (shared)
+   BUTTONS (shared base styles)
 --------------------------------------------------------------- */
 button {
     background-color: #111;
     color: white;
-    border: 1 px solid #e7e7e7;
+    border: none;
     padding: 12px 24px;
     border-radius: 8px;
     font-size: 16px;
@@ -202,11 +313,11 @@ button {
     margin: 5px;
     transition: background-color 0.3s;
 }
- 
+
 button:hover {
     background-color: #444;
 }
- 
+
 #goKitchenBtn {
     position: absolute;
     bottom: 30px;
@@ -214,7 +325,7 @@ button:hover {
     z-index: 2;
     background-color: #4CAF50;
 }
- 
+
 #goKitchenBtn:hover {
     background-color: #45a049;
 }
