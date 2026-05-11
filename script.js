@@ -159,9 +159,9 @@ function goToKitchen() {
     startKitchenGame();
 }
 
-startKitchenGame() {
-
-}
+//startKitchenGame() {
+//
+//}
  
 // ---------------------------------------------------------------
 // SERVE ORDER — award money, increment counter, return to lobby
