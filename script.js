@@ -118,7 +118,7 @@ function playSound(soundName) {
 let currentCustomer = null;
 let money           = 0;
 let customersServed = 0;
-let secondsLeft     = 10;   // time remaining on the kitchen timer
+let secondsLeft     = 12;   // time remaining on the kitchen timer
 let currentStep     = 0;    // which step the player must click next
 let timerInterval   = null; // reference to setInterval so we can stop it later
 
@@ -254,7 +254,7 @@ function goToKitchen() {
 function startKitchenGame() {
     // Reset state fresh every time the kitchen loads
     currentStep = 0;
-    secondsLeft = 10;
+    secondsLeft = 12;
 
     // Build the progress tracker — a row of pills showing each step
     // They start grey and turn green as steps are completed
