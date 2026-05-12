@@ -329,3 +329,21 @@ button:hover {
 #goKitchenBtn:hover {
     background-color: #45a049;
 }
+
+#pauseMusicBtn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+    background-color: #222;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 15px;
+    font-weight: bold;
+    opacity: 0.9;
+}
+
+#pauseMusicBtn:hover {
+    background-color: #444;
+}

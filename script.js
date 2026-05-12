@@ -82,6 +82,7 @@ const customers = [
 // All sounds stored in one array of objects
 
 const gameSounds = [
+    { name: "button", id: "btn-click" },
     { name: "background", id: "bg-music" },
     { name: "greeting", id: "customer-greeting" },
     { name: "write", id: "write-order" },
@@ -136,6 +137,12 @@ function showScreen(screen) {
 // INITIALIZE — wire up all button listeners once
 // ---------------------------------------------------------------
 function initializeGame() {
+    // Play button sound on every button click
+    document.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', function() {
+            playSound('button');
+        });
+    });
     startBtn.addEventListener("click", goToLobby);
     document.getElementById("howToBtn").addEventListener("click", showHowToPlay);
     takeOrderBtn.addEventListener("click", takeOrder);
@@ -143,6 +150,22 @@ function initializeGame() {
     document.getElementById("retryBtn").addEventListener("click", retryGame);
     document.getElementById("homeBtn").addEventListener("click", goToHome);
     // No serveOrderBtn listener — game ends itself when steps are done
+
+    // Pause Music button (now global)
+    let pauseMusicBtn = document.getElementById("pauseMusicBtn");
+    let bgMusic = document.getElementById("bg-music");
+    let musicPaused = false;
+    pauseMusicBtn.addEventListener("click", function() {
+        if (!musicPaused) {
+            bgMusic.pause();
+            pauseMusicBtn.textContent = "Play Music";
+            musicPaused = true;
+        } else {
+            bgMusic.play();
+            pauseMusicBtn.textContent = "Pause Music";
+            musicPaused = false;
+        }
+    });
 }
 
 // ---------------------------------------------------------------
@@ -200,7 +223,7 @@ function showHowToPlay() {
 // TAKE ORDER
 // ---------------------------------------------------------------
 function takeOrder() {
-    playSound("write");
+    playSound("write"); // Ensure write audio plays when taking order
     currentCustomer = customers[Math.floor(Math.random() * customers.length)];
 
     customerNameDisplay.textContent = currentCustomer.name;
@@ -225,13 +248,6 @@ function goToKitchen() {
     startKitchenGame();
 }
 
-<<<<<<< HEAD
-=======
-//startKitchenGame() {
-//
-//}
- 
->>>>>>> 0f4bdb19b3553c506a6f906f004162250f2e777b
 // ---------------------------------------------------------------
 // KITCHEN MINI-GAME
 // ---------------------------------------------------------------
@@ -348,12 +364,13 @@ function updateTimerDisplay() {
 // FAIL — timer hit zero
 // ---------------------------------------------------------------
 function failOrder() {
-    playSound("lose");
+    playSound("lose"); // Play lose audio when timer runs out
     alert("⏰ Too slow! The order was ruined.");
     money -= currentCustomer.reward;
     updateDisplay();
     if (money < 0) {
         showScreen(screenGameOver);
+        playSound("lose"); // Play lose audio on game over
     } else {
         goToLobby(); // return to lobby, no money awarded
     }
