@@ -5,6 +5,7 @@ const screenHome     = document.getElementById("screenHome");
 const screenLobby    = document.getElementById("screenLobby");
 const screenKitchen  = document.getElementById("screenKitchen");
 const screenGameOver = document.getElementById("screenGameOver");
+const screenVictory   = document.getElementById("screenVictory");
 
 // ---------------------------------------------------------------
 // HUD ELEMENTS
@@ -130,6 +131,7 @@ function showScreen(screen) {
     screenLobby.classList.remove("active");
     screenKitchen.classList.remove("active");
     screenGameOver.classList.remove("active");
+    screenVictory.classList.remove("active");
     screen.classList.add("active");
 }
 
@@ -149,6 +151,16 @@ function initializeGame() {
     goKitchenBtn.addEventListener("click", goToKitchen);
     document.getElementById("retryBtn").addEventListener("click", retryGame);
     document.getElementById("homeBtn").addEventListener("click", goToHome);
+    document.getElementById("continueBtn").addEventListener("click", function() {
+        showScreen(screenLobby);
+        setupLobby();
+    });
+    document.getElementById("victoryHomeBtn").addEventListener("click", function() {
+        money = 0;
+        customersServed = 0;
+        updateDisplay();
+        showScreen(screenHome);
+    });
     // No serveOrderBtn listener — game ends itself when steps are done
 
     // Pause Music button (now global)
@@ -388,7 +400,12 @@ function serveOrder() {
         customersServed += 1;
         updateDisplay();
     }
-    goToLobby();
+    // Show victory screen if $50 or more
+    if (money >= 50) {
+        showScreen(screenVictory);
+    } else {
+        goToLobby();
+    }
 }
 
 // ---------------------------------------------------------------

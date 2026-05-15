@@ -215,6 +215,31 @@ body {
 }
 
 /* ---------------------------------------------------------------
+   VICTORY SCREEN
+--------------------------------------------------------------- */
+#screenVictory {
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+}
+
+#screenVictory h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+#screenVictory p {
+    font-size: 24px;
+    margin-bottom: 40px;
+}
+
+#victoryButtons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* ---------------------------------------------------------------
    HUD CARDS
 --------------------------------------------------------------- */
 .hud-card {
